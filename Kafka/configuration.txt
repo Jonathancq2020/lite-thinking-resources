@@ -1,0 +1,46 @@
+#Para configurar cluster de apache kafka
+
+PLAINTEXT_HOST = Se refiere al nombre del host o dirección IP, pero hay que tener en cuenta que no es un protocolo seguro y es util para entronos de prueba y se debe implemnetar ssl
+
+KAFKA_BROKER_ID = el id del broker si queremos poner una sola Ejemplo: value: 0 caso contrario ubiicar valores por defecto
+
+KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR= (Se debe registrar cuando tenemos menos de 3 brokers)
+                Es una configuración de Kafka que determina el factor de replicación para el tema de offsets internos. 
+                Este tema se utiliza para almacenar los offsets de los consumidores (es decir, la posición de lectura en los temas) y es 
+                fundamental para la tolerancia a fallos y la disponibilidad de Kafka
+KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 
+                Especifica el número mínimo de réplicas ISR que deben estar activas y disponibles para garantizar la integridad de los registros de estado de transacción.
+                Cuando se realizan operaciones de escritura transaccionales en Kafka, se registran en un tema especial llamado "transaction.state.log"
+                Si el número de réplicas ISR cae por debajo de este umbral, Kafka puede suspender las operaciones de escritura hasta que se restaure el número adecuado de réplicas ISR.
+                Ajustar esta configuración permite a los administradores de Kafka controlar la durabilidad y la disponibilidad de las operaciones de escritura transaccionales.
+                Un valor mas alto garantiza una mayor durabilidad, pero puede afectar la latencia y la disponibilidad de las transacciones, ya que se requiere que un mayor número de 
+                réplicas ISR estén disponibles antes de que se pueda comprometer una transacción.
+KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR:
+                Es una configuración en Kafka que determina el factor de replicación para el tema de registro de estado de transacción.
+                Este tema es crítico para garantizar la integridad y consistencia de las transacciones en Kafka cuando se utiliza la característica de transacciones.
+                Cuando se habilitan las transacciones en Kafka, se crea un tema especial llamado "transaction.state.log".
+                Este tema almacena los registros de estado de transacción que son esenciales para el mantenimiento de la coherencia y la durabilidad de las transacciones.
+                Especifica cuántas réplicas del tema transaction.state.log se mantendrán en el clúster de Kafka
+                KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=3, Kafka asegurará que haya tres réplicas del tema transaction.state.log en el clúster, 
+                lo que garantiza una mayor tolerancia a fallos en comparación con un factor de replicación más bajo.
+KAFKA_ADVERTISED_LISTENERS:
+                Setea las direcciones de conección que podrían usar por los clientes
+
+KAFKA_ZOOKEEPER_CONNECT:
+                Indica las url de zookeper
+
+KAFKA_INTER_BROKER_LISTENER_NAME:
+                Setea los nombres de conección para comunicaciones internas
+
+KAFKA_LOG_CLEANUP_POLICY:
+                Politiica que permite eliminar registros antiguos de los temas topics
+                tipos:
+                    - delete: Esta opción indica que los registros se eliminarán después de que hayan transcurrido un período de retención determinado.
+                              El tiempo de retención se especifica mediante la configuración log.retention.hours o log.retention.minutes.  
+                    - compact: Esta opción indica que los registros se compactarán periódicamente en lugar de ser eliminados.
+                    - delete,compact: Esta opción combina las políticas de limpieza de registros de eliminación y compactación.
+                    - compact,delete: Similar a delete,compact, pero Kafka primero compactará los registros y luego eliminará los registros antiguos según la política de eliminación
+
+
+
+ 

@@ -1,0 +1,44 @@
+PASOS PARA Ejecutar
+##Proceso de ejecucion
+1. Ejecutar el namespace
+2. Primero ejecutar zookeper
+3. Segundo ejecutar kafka-broker
+4. Crear servicio de observabilidad para el cluster con kafdrop
+
+
+MONITORING Y OBSERVABILIDAD
+##Creando una herramienta para observabilidad de apache kafka
+1. Crear namespace de monitoring
+kubectl create namespace monitoring
+
+2. Para visualizar su herramienta de observabilidad
+kubectl port-forward svc/grafana -n monitoring <local_port>:3000
+
+3. Al abrir grafana las credenciales para poder ingresar son :
+    user: admin
+    password: admin
+    ------
+    en este paso te van a volver a pedir nueva contraseña:
+    password: 123456
+
+
+EJERCICIO 1
+##Vamos hacer pruebas en el cluster cuando ya este listo el cluster
+
+1. entrar: kubectl exec -it pod/kafka-deployment-6dfd6b99f5-kg4jd -n apache -- /bin/bash
+
+2. crear topic: kafka-topics --bootstrap-server localhost:9092 --create --topic topic1 --replication-factor 1 --partitions 3
+
+3. enviar mensaje: kafka-console-producer --broker-list localhost:9092 --topic topic1
+
+4. consumir mensaje: kafka-console-consumer --bootstrap-server localhost:9092 --topic audit --from-beginning
+
+EJERCICIO 2
+##Usando un microservicio que nos de la prueba de eventos
+6. Para poder publicar en docker hub
+
+a) docker build -t <<user_hub>>/<<image>>:<<tag>> .
+
+b) docker login
+
+c) docker push <<user_hub>>/<<image>>:<<tag>>
