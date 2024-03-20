@@ -4,7 +4,7 @@ metadata:
   labels:
     app: kafka-producer
   name: kafka-producer
-  namespace: apache-kafka
+  namespace: apache
 spec:
   replicas: 1
   selector:
@@ -16,7 +16,7 @@ spec:
         app: kafka-producer
     spec:
       containers:
-        - image: alexdev2017/kafkaconsumer:1.2
+        - image: alexdev2017/kafkaconsumer:1.5
           imagePullPolicy: Always
           name: kafka-producer
           ports:
@@ -28,7 +28,7 @@ metadata:
   labels:
     app: kafka-producer
   name: kafka-producer-service
-  namespace: apache-kafka
+  namespace: apache
 spec:
   ports:
    - name: kafka-producer-port

@@ -37,7 +37,7 @@ KAFKA_LOG_CLEANUP_POLICY:
                 tipos:
                     - delete: Esta opción indica que los registros se eliminarán después de que hayan transcurrido un período de retención determinado.
                               El tiempo de retención se especifica mediante la configuración log.retention.hours o log.retention.minutes.  
-                    - compact: Esta opción indica que los registros se compactarán periódicamente en lugar de ser eliminados.
+                    - compact: Esta opción indica que los registros se compactarán periódicamente en lugar de ser eliminados. (Obligatorio enviar con un key)
                     - delete,compact: Esta opción combina las políticas de limpieza de registros de eliminación y compactación.
                     - compact,delete: Similar a delete,compact, pero Kafka primero compactará los registros y luego eliminará los registros antiguos según la política de eliminación
 

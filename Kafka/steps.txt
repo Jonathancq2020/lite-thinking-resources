@@ -25,13 +25,20 @@ kubectl port-forward svc/grafana -n monitoring <local_port>:3000
 EJERCICIO 1
 ##Vamos hacer pruebas en el cluster cuando ya este listo el cluster
 
-1. entrar: kubectl exec -it pod/kafka-deployment-6dfd6b99f5-kg4jd -n apache -- /bin/bash
+1. entrar: kubectl exec -it <<name_pod_kafka>> -n apache -- /bin/bash
 
-2. crear topic: kafka-topics --bootstrap-server localhost:9092 --create --topic topic1 --replication-factor 1 --partitions 3
+2. crear topic: kafka-topics --bootstrap-server localhost:9092 --create --topic <<name_topic>> --replication-factor 1 --partitions 3
 
-3. enviar mensaje: kafka-console-producer --broker-list localhost:9092 --topic topic1
+3. enviar mensaje: kafka-console-producer --broker-list localhost:9092 --topic <<name_topic>>
+    > hola buenos dias
+    > esta es una practica
+    > 
 
-4. consumir mensaje: kafka-console-consumer --bootstrap-server localhost:9092 --topic audit --from-beginning
+4. consumir mensaje: kafka-console-consumer --bootstrap-server localhost:9092 --topic <<name_topic>> --from-beginning
+    hola buenos dias
+
+5. Observalidad: kubectl port-forward <<name_pod_kafka>> <<port>>:9000 -n apache
+   localhost:<<port>>
 
 EJERCICIO 2
 ##Usando un microservicio que nos de la prueba de eventos
