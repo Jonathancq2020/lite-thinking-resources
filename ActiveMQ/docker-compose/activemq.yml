@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  activemq:
+    image: rmohr/activemq:latest
+    container_name: activemq
+    ports:
+      - "8161:8161" # Puerto para la consola web de administración
+      - "61616:61616" # Puerto para OpenWire (mensajería)
+      - "5672:5672" # Puerto para AMQP (mensajería)
+      - "61613:61613" # Puerto para STOMP (mensajería)
+    environment:
+      ACTIVEMQ_ADMIN_LOGIN: admin # Usuario para la consola web de administración
+      ACTIVEMQ_ADMIN_PASSWORD: admin # Contraseña para la consola web de administración
