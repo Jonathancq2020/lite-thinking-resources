@@ -12,3 +12,7 @@ services:
     environment:
       ACTIVEMQ_ADMIN_LOGIN: admin # Usuario para la consola web de administración
       ACTIVEMQ_ADMIN_PASSWORD: admin # Contraseña para la consola web de administración
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
